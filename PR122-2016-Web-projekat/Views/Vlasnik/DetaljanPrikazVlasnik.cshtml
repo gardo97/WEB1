@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "DetaljanPrikazVlasnik";
+}
+<head>
+    <link rel="stylesheet" href="~/Scripts/lookCss.css">
+</head>
+<body style="background-image: url( ~/Images/fitnessCentar.jpg); background-position:center; background-repeat:no-repeat;background-size:cover">
+    <h2>DetaljanPrikazVlasnik</h2>
+
+    <table border="1">
+        <tr><th>Naziv</th><th>Adresa</th><th>GodinaOtvaranja</th><th>Vlasnik</th><th>Mesecna Clanarina</th><th>Godisnja Clanarina</th><th>Cena jednog trenina</th><th>Cena grupnog treninga</th><th>Cena persnolnog trenera</th></tr>
+        <tr><td>@ViewBag.FitnesCentar.Naziv</td><td>@ViewBag.FitnesCentar.Adresa</td><td>@ViewBag.FitnesCentar.GodinaOtvaranja</td><td>@ViewBag.FitnesCentar.KorisnickoImeVlasnika</td><td>@ViewBag.FitnesCentar.MesecnaClanarina</td><td>@ViewBag.FitnesCentar.GodisnjaClanarina</td><td>@ViewBag.FitnesCentar.CenaJednogTreninga</td><td>@ViewBag.FitnesCentar.CenaGrupnogTreninga</td><td>@ViewBag.FitnesCentar.CenaPersonalniTrener</td></tr>
+    </table>
+    <form action="/Login/LoginVlasnik" method="post">
+        <input type="hidden" name="KorisnickoIme" value="@ViewBag.korisnicko_ime" />
+        <input type="submit" name="Nazad" value="Nazad" />
+    </form>
+    @if (ViewBag.GrupniTreninzi == null || ViewBag.GrupniTreninzi.Count == 0)
+    {
+<p>@ViewBag.FitnesCentar.Naziv nema nijedan grupni trening</p> }
+else
+{
+int i = 0;
+foreach (var gp in ViewBag.GrupniTreninzi)
+{
+    DateTime dt;
+    DateTime.TryParse(gp.DatumTreninga, out dt);
+    if (dt > DateTime.Now)
+    {
+<table border="1">
+    <tr><td>Naziv:</td><td>@gp.Naziv</td></tr>
+    <tr><td>TipTreninga:</td><td>@gp.Trening</td></tr>
+    <tr><td>FitnesCentar:</td><td>@gp.NazivFitnesCentra</td></tr>
+    <tr><td>TrajanjeTrenigna</td><td>@gp.TrajanjeTreninga</td></tr>
+    <tr><td>DatumTreninga</td><td>@gp.DatumTreninga</td></tr>
+    <tr><td>MaxBrojPosetilaca</td><td>@gp.MaxBrojPosetilaca</td></tr>
+</table>
+                        <br /> i++;
+                    }
+                    if (i == 0)
+                    {
+<p>@ViewBag.FitnesCentar.Naziv nema nijedan grupni trening</p>}
+
+}
+}
+    <p>Komentari</p>
+    @if (ViewBag.Komentari.Count == 0 || ViewBag.Komentari == null)
+    {
+<p>Ne postoje komentari za ovaj fitnes centar</p> }
+else
+{
+foreach (var k in ViewBag.Komentari)
+{
+    if (k.NazivFitnesCentra == @ViewBag.FitnesCentar.Naziv && k.Vidljivost == "Odobreno")
+    {
+<table border="1">
+    <tr><td>@k.KorisnickoImePosetioca</td></tr>
+    <tr><td>@k.TekstKomentara</td></tr>
+    <tr><td>@k.Ocena</td></tr>
+</table>
+                        <br />}
+                }
+            }
+</body>

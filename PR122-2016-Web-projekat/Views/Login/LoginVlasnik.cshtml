@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "LoginVlasnik";
+}
+<head>
+    <link rel="stylesheet" href="~/Scripts/lookCss.css">
+</head>
+<body style="background-image: url( ~/Images/fitnessCentar.jpg)">
+    <h2>Pocetna Vlasnik</h2>
+
+    <form action="/Vlasnik/ProfilVlasnika" method="post">
+        <input type="hidden" value="@ViewBag.korisnicko_ime" name="KorisnickoIme" />
+        <input type="submit" value="Pregled podataka" />
+    </form>
+    <form action="/Vlasnik/PregledTrenera" method="post">
+        <input type="hidden" value="@ViewBag.korisnicko_ime" name="KorisnickoIme" />
+        <input type="hidden" value="@ViewBag.korisnicko_ime" name="KorisnickoImeVlasnika" />
+        <input type="submit" value="Treneri" />
+    </form>
+    <form action="/Vlasnik/FitnesCentriVlasnik" method="post">
+        <input type="hidden" value="@ViewBag.korisnicko_ime" name="KorisnickoIme" />
+        <input type="submit" value="Moji fitnes centri" />
+    </form>
+    <form action="/Vlasnik/Komentari" method="post">
+        <input type="hidden" value="@ViewBag.korisnicko_ime" name="KorisnickoIme" />
+        <input type="submit" value="Komentari" />
+    </form>
+    <form method="post" action="/Login/LoginVlasnik">
+        <div>Sortiraj:</div>
+        <input type="radio" name="tipSortiranja" value="RASTUCE" />RASTUCE
+        <input type="radio" name="tipSortiranja" value="OPADAJUCE" />OPADAJUCE
+
+        <select name="sortiranjePrema" required>
+            <option value="Naziv"> NAZIV</option>
+            <option value="Adresa"> ADRESA</option>
+            <option value="GodinaOtvaranja">GODINA OTVARANJA</option>
+        </select>
+        <br />
+        <input type="hidden" value="@ViewBag.korisnicko_ime" name="KorisnickoIme" />
+        <input type="submit" name="Opcija" value="Sortiraj" />
+        <div>Naziv:</div><input type="text" name="Naziv" value="" placeholder="Naziv" /><br />
+        <div>Adresa:</div><input type="text" name="Adresa" value="" placeholder="ulica broj,grad,postanski broj" /><br />
+        <div>Godina otvaranja:</div><input type="text" name="DonjaGranica" placeholder="DonjaGranica" /><input type="text" name="GornjaGranica" placeholder="GornjaGranica" /><br />
+        <br />
+        <input type="submit" name="Opcija" value="Pretrazi" />
+
+    </form>
+    @if (ViewBag.FitnesCentri == null || ViewBag.FitnesCentri.Count == 0)
+    {
+<p>Ne postoji nijedan fitnes centar</p> }
+            else
+            {
+<p>Fitnes Centri</p>
+                <table border="1">
+                    <tr><th>Naziv</th><th>Adresa</th><th>GodinaOtvaranja</th></tr>
+                    @foreach (var fc in ViewBag.FitnesCentri)
+                    {
+    <tr>
+        <td>@fc.Naziv</td>
+        <td>@fc.Adresa</td>
+        <td>@fc.GodinaOtvaranja</td>
+        <td>
+            <form action="/Vlasnik/DetaljanPrikazVlasnik" method="post">
+                <input type="submit" name="Detalji" value="Detalji">
+                <input type="hidden" name="Naziv" value="@fc.Naziv">
+                <input type="hidden" name="KorisnickoIme" value="@ViewBag.korisnicko_ime">
+            </form>
+        </td>
+    </tr>}
+                </table>}
+</body>

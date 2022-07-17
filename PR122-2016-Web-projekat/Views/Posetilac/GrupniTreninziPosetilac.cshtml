@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "GrupniTreninziPosetilac";
+}
+<head>
+    <link rel="stylesheet" href="~/Scripts/lookCss.css">
+</head>
+<body style="background-image: url( ~/Images/fitnessCentar.jpg); background-position:center; background-repeat:no-repeat;background-size:cover">
+    <h2>OdradjeniTreninziPosetilac</h2>
+
+    <form action="/Login/LoginPosetilac" method="post">
+        <input type="hidden" name="KorisnickoIme" value="@ViewBag.korisnicko_ime" />
+        <input type="submit" name="Nazad" value="Nazad" />
+    </form>
+
+    <form method="post" action="/Posetilac/GrupniTreninziPosetilac">
+        <div>Sortiraj:</div>
+        <input type="radio" name="tipSortiranja" value="RASTUCE" />RASTUCE
+        <input type="radio" name="tipSortiranja" value="OPADAJUCE" />OPADAJUCE
+
+        <select name="sortiranjePrema" required>
+            <option value="Naziv"> NAZIV</option>
+            <option value="TipTreninga"> TIP TRENINGA</option>
+            <option value="DatumOdrzavanja">DATUM ODRZAVANJA</option>
+        </select>
+        <br />
+        <input type="hidden" value="@ViewBag.korisnicko_ime" name="KorisnickoIme" />
+        <input type="submit" name="Opcija" value="Sortiraj" />
+
+
+        <div>Naziv:</div><input type="text" name="Naziv" value="" /><br />
+        <div>TipTreninga:</div><select name="TipTreninga">
+            <option value=""></option>
+            <option value="YOGA">YOGA</option>
+            <option value="BODYPUMP">BODYPUMP</option>
+            <option value="CARDIO">CARDIO</option>
+        </select><br />
+        <div>Datum Odrzavanja(yyyy/mm/dd HH:mm):</div><input type="text" name="DonjaGranica" placeholder="DonjaGranica" /><input type="text" name="GornjaGranica" placeholder="GornjaGranica" /><br />
+        <br />
+        <input type="submit" name="Opcija" value="Pretrazi" />
+
+    </form>
+
+    @if (ViewBag.GrupniTreninzi.Count > 0)
+    {
+        int i = 0;
+        foreach (var t in ViewBag.GrupniTreninzi)
+        {
+            DateTime dt;
+            DateTime.TryParse(t.DatumTreninga, out dt);
+            if (dt < DateTime.Now)
+            {
+<table border="1">
+    <tr><td>Naziv:</td><td>@t.Naziv</td></tr>
+    <tr><td>TipTreninga:</td><td>@t.Trening</td></tr>
+    <tr><td>FitnesCentar:</td><td>@t.NazivFitnesCentra</td></tr>
+    <tr><td>TrajanjeTreninga:</td><td>@t.TrajanjeTreninga</td></tr>
+    <tr><td>DatumTreninga:</td><td>@t.DatumTreninga</td></tr>
+    <tr><td>MaxBrojPosetilaca:</td><td>@t.MaxBrojPosetilaca</td></tr>
+</table>
+                        <br /> i++;
+                    }
+
+                }
+                if (i == 0)
+                {
+<p>@ViewBag.korisnicko_ime nema nijedan odradjen trening</p> }
+}
+else
+{ <p>@ViewBag.korisnicko_ime nema nijedan odradjen trening</p>}
+</body>

@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "ProfilVlasnika";
+}
+<head>
+    <link rel="stylesheet" href="~/Scripts/lookCss.css">
+</head>
+<body style="background-image: url( ~/Images/fitnessCentar.jpg); background-position:center; background-repeat:no-repeat;background-size:cover">
+    <h2>Profil Vlasnika</h2>
+
+    <p>Pregled i izmena mojih podataka</p>
+    <form action="/Vlasnik/ProfilVlasnika" method="post">
+        <table border="1">
+            <tr>
+                <th>
+                    Korisnicko ime:
+                </th>
+                <th>
+                    Lozinka:
+                </th>
+                <th>
+                    Ime:
+                </th>
+                <th>
+                    Prezime:
+                </th>
+                <th>
+                    Pol:
+                </th>
+                <th>
+                    Email:
+                </th>
+                <th>
+                    Datum Rodjenja:
+                </th>
+                <th>
+                    Uloga:
+                </th>
+
+            <tr>
+                <td>
+                    @ViewBag.VlasnikPodaci.KorisnickoIme
+                </td>
+                <td>
+                    <input type="text" name="Lozinka" value=@ViewBag.VlasnikPodaci.Lozinka required />
+                </td>
+                <td>
+                    <input type="text" name="Ime" value=@ViewBag.VlasnikPodaci.Ime required />
+                </td>
+                <td>
+                    <input type="text" name="Prezime" value=@ViewBag.VlasnikPodaci.Prezime required />
+                </td>
+                <td>
+                    <input type="text" name="Pol" value=@ViewBag.VlasnikPodaci.Pol required />
+                </td>
+                <td>
+                    <input type="text" name="Email" value=@ViewBag.VlasnikPodaci.Email required />
+                </td>
+                <td>
+                    <input type="date" name="DatumRodjenja" value="@ViewBag.VlasnikPodaci.DatumRodjenja" min="1990-03-01" max="2007-05-01" required />
+                </td>
+                <td>
+                    @ViewBag.VlasnikPodaci.Uloga
+                </td>
+            </tr>
+
+        </table>
+
+
+        <input type="hidden" value=@ViewBag.korisnicko_ime name="KorisnickoIme" />
+        <input type="submit" value="Sacuvaj" name="Sacuvaj" />
+    </form>
+    @if (ViewBag.FitnesCentriVlasnika != null)
+    {
+        foreach (var fc in ViewBag.FitnesCentriVlasnika)
+        {
+<label>@fc</label><br /> }
+}
+else
+{
+<p>Ne posedujem nijedan fitnes centar</p>}
+    <form action="/Login/LoginVlasnik" method="post">
+        <input type="hidden" name="KorisnickoIme" value="@ViewBag.VlasnikPodaci.KorisnickoIme" />
+        <input type="submit" value="Nazad" />
+    </form>
+</body>

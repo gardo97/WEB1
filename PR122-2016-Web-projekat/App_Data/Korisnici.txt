@@ -1,0 +1,10 @@
+nikola?123?Nikola?Gardovic?MUSKI?nikolagardovic@gmail.com?2000-05-01?TRENER?False
+petar?123?Petar?Gardovic?MUSKI?petargardovic@gmail.com?2000-05-01?TRENER?False
+ccc?123?CCC?Gardovic?MUSKI?cccgardovic@gmail.com?2000-05-04?VLASNIK?False
+aleksa?123?Aleksa?Gardovic?MUSKI?aleksagardovic@gmail.com?1997-06-10?POSETILAC?False
+maja?123?Maja?Gardovic?ZENSKI?majagardovic@gmail.com?1997-06-10?POSETILAC?False
+bbb?123?BBB?Gardovic?MUSKI?bbbgardovic@gmail.com?2000-05-04?VLASNIK?False
+aaa?123?AAA?Gardovic?MUSKI?aaagardovic@gmail.com?2000-05-04?TRENER?False
+igor?123?Igor?Gardovic?MUSKI?igorgardovic@gmail.com?1997-06-10?POSETILAC?False
+mitar?123?Mitar?Gardovic?MUSKI?mitargardovic@gmail.com?1997-06-10?POSETILAC?True
+micika97?123?Milica?Gardovic?ZENSKI?micikagardovic@gmail.com?1999-03-11?POSETILAC?False

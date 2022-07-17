@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "ProfilPosetioca";
+}
+<head>
+    <link rel="stylesheet" href="~/Scripts/lookCss.css">
+</head>
+<body style="background-image: url( ~/Images/fitnessCentar.jpg); background-position:center; background-repeat:no-repeat;background-size:cover">
+    <h2>ProfilPosetioca</h2>
+
+    <p>Pregled i izmena mojih podataka</p>
+    <form action="/Posetilac/ProfilPosetioca" method="post">
+        <table border="1">
+            <tr>
+                <th>
+                    Korisnicko ime:
+                </th>
+                <th>
+                    Lozinka:
+                </th>
+                <th>
+                    Ime:
+                </th>
+                <th>
+                    Prezime:
+                </th>
+                <th>
+                    Pol:
+                </th>
+                <th>
+                    Email:
+                </th>
+                <th>
+                    Datum Rodjenja:
+                </th>
+                <th>
+                    Uloga:
+                </th>
+
+            <tr>
+                <td>
+                    @ViewBag.PosetilacPodaci.KorisnickoIme
+                </td>
+                <td>
+                    <input type="text" name="Lozinka" value=@ViewBag.PosetilacPodaci.Lozinka required />
+                </td>
+                <td>
+                    <input type="text" name="Ime" value=@ViewBag.PosetilacPodaci.Ime required />
+                </td>
+                <td>
+                    <input type="text" name="Prezime" value=@ViewBag.PosetilacPodaci.Prezime required />
+                </td>
+                <td>
+                    <input type="text" name="Pol" value=@ViewBag.PosetilacPodaci.Pol required />
+                </td>
+                <td>
+                    <input type="text" name="Email" value=@ViewBag.PosetilacPodaci.Email required />
+                </td>
+                <td>
+                    <input type="date" name="DatumRodjenja" value="@ViewBag.PosetilacPodaci.DatumRodjenja" min="1990-03-01" max="2007-05-01" required />
+                </td>
+                <td>
+                    @ViewBag.PosetilacPodaci.Uloga
+                </td>
+            </tr>
+
+        </table>
+        <input type="hidden" value=@ViewBag.korisnicko_ime name="KorisnickoIme" />
+        <input type="submit" name="Sacuvaj" value="Sacuvaj" />
+    </form>
+
+    <form action="/Login/LoginPosetilac" method="post">
+        <input type="hidden" name="KorisnickoIme" value="@ViewBag.PosetilacPodaci.KorisnickoIme" />
+        <input type="submit" value="Nazad" />
+    </form>
+</body>

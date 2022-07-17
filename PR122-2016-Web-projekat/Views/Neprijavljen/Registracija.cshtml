@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "Registracija";
+}
+<head>
+    <link rel="stylesheet" href="~/Scripts/lookCss.css">
+</head>
+<h2>Registracija</h2>
+<html>
+<body style="background-image: url( ~/Images/fitnessCentar.jpg); background-position:center; background-repeat:no-repeat;background-size:cover">
+    <div style="text-align: center;">
+        <form method="post" action="/Neprijavljen/RegistracijaKorisnika">
+            <input type="text" name="KorisnickoIme" id="KorisnickoIme" placeholder="KorisnickoIme" required="">
+            <br />
+            <br />
+
+            <input type="password" name="Lozinka" id="Lozinka" placeholder="Lozinka" required="">
+            <br />
+            <br />
+
+            <input type="text" name="Ime" id="Ime" placeholder="Ime" required="">
+            <br />
+            <br />
+            <input type="text" name="Prezime" id="Prezime" placeholder="Prezime" required="">
+            <br />
+            <br />
+            <input type="text" name="Email" id="Email" placeholder="Email" required="">
+            <br />
+            <br />
+            <input type="date" id="DatumRodnjenja" name="DatumRodjenja" min="1990-03-01" value="2000-05-01" max="2007-05-01" required>
+            <br />
+            <font color="black">(MESEC-DAN-GODINA)</font>
+            <br />
+            <br />
+            <label>Pol :</label>
+            <input type="radio" name="Pol" id="Pol" value="MUSKI" required=""><font color="black">MUSKI</font>
+            <input type="radio" name="Pol" id="Pol" value="ZENSKI" required=""><font color="black">ZENSKI</font>
+            <br />
+            <br />
+            <input type="submit" name="Registracija" id="Registracija" value="Registracija">
+        </form>
+        <a href="/Neprijavljen/PocetnaNeprijavljeni">NAZAD</a>
+    </div>
+</body>
+</html>
+

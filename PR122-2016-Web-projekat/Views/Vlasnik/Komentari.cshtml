@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "Komentari";
+}
+<head>
+    <link rel="stylesheet" href="~/Scripts/lookCss.css">
+</head>
+<body style="background-image: url( ~/Images/fitnessCentar.jpg); background-position:center; background-repeat:no-repeat;background-size:cover">
+    <h2>Komentari</h2>
+
+    <form action="/Login/LoginVlasnik" method="post">
+        <input type="hidden" name="KorisnickoIme" value="@ViewBag.korisnicko_ime" />
+        <input type="submit" name="Nazad" value="Nazad" />
+    </form>
+
+    @if (ViewBag.ListaKomentara.Count > 0)
+    {
+        foreach (var k in ViewBag.ListaKomentara)
+        {
+            if (k.Vidljivost == "CekaOdobrenje")
+            {
+<form action="/Vlasnik/Komentari" method="post">
+    <table border="1">
+        <tr><td>@k.NazivFitnesCentra</td></tr>
+        <tr><td>@k.KorisnickoImePosetioca</td></tr>
+        <tr><td>@k.TekstKomentara</td></tr>
+        <tr><td>@k.Ocena</td></tr>
+        <tr><td>@k.Vidljivost</td></tr>
+    </table>
+    <table>
+        <tr>
+            <td>
+                <input type="submit" name="Opcija" value="Odobri" />
+                <input type="submit" name="Opcija" value="Odbij" />
+                <input type="hidden" name="NazivFitnesCentra" value="@k.NazivFitnesCentra" />
+                <input type="hidden" name="KorisnickoImePosetioca" value="@k.KorisnickoImePosetioca" />
+                <input type="hidden" name="TekstKomentara" value="@k.TekstKomentara" />
+                <input type="hidden" name="Ocena" value="@k.Ocena" />
+                <input type="hidden" name="Vidljivost" value="@k.Vidljivost" />
+                <input type="hidden" name="KorisnickoIme" value="@ViewBag.korisnicko_ime" />
+            </td>
+        </tr>
+    </table>
+</form>
+                        <br /> }
+                    else
+                    {
+<table border="1">
+    <tr><td>@k.NazivFitnesCentra</td></tr>
+    <tr><td>@k.KorisnickoImePosetioca</td></tr>
+    <tr><td>@k.TekstKomentara</td></tr>
+    <tr><td>@k.Ocena</td></tr>
+    <tr><td>@k.Vidljivost</td></tr>
+</table>
+                        <br /> }
+
+                }
+
+            }
+            else
+            {
+<p>Ne postoje komentari za fitnes centre</p>}
+</body>

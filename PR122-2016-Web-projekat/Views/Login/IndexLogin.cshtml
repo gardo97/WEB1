@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "IndexLogin";
+}
+<head>
+    <link rel="stylesheet" href="~/Scripts/lookCss.css">
+</head>
+<h2>IndexLogin</h2>
+
+
+<html>
+<body style="background-image: url( ~/Images/fitnessCentar.jpg)">
+    <div style="text-align: left; ">
+        <form method="post" action="/Login/Login">
+            <input type="text" name="KorisnickoIme" id="KorisnickoIme" placeholder="KorisnickoIme" required="">
+
+            <br />
+            <br />
+
+            <input type="password" name="Lozinka" id="Lozinka" placeholder="Lozinka" required="">
+            <br />
+            <br />
+
+            <input type="submit" name="Login" id="Login" value="Login">
+        </form>
+        <a href="/Neprijavljen/PocetnaNeprijavljeni">NAZAD</a>
+    </div>
+
+</body>
+</html>

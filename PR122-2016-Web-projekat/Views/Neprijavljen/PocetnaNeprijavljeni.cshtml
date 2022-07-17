@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "PocetnaNeprijavljeni";
+}
+<head>
+    <link rel="stylesheet" href="~/Scripts/lookCss.css">
+</head>
+<body style="background-image: url( ~/Images/fitnessCentar.jpg); background-position:center; background-repeat:no-repeat;background-size:cover">
+    <h2>PocetnaNeprijavljeni</h2>
+    <ul>
+        <li>
+            <form action="/Neprijavljen/Registracija" method="post">
+                <input type="submit" value="Registration" name="Registration">
+            </form>
+        </li>
+        <li>
+            <form action="/Login/IndexLogin" method="post">
+                <input type="submit" value="Login" name="Login">
+            </form>
+        </li>
+    </ul>
+
+    <form method="post" action="/Neprijavljen/PocetnaNeprijavljeni">
+        <div>Sortiraj:</div>
+        <input type="radio" name="tipSortiranja" value="RASTUCE" />RASTUCE
+        <input type="radio" name="tipSortiranja" value="OPADAJUCE" />OPADAJUCE
+
+        <select name="sortiranjePrema" required>
+            <option value="Naziv"> NAZIV</option>
+            <option value="Adresa"> ADRESA</option>
+            <option value="GodinaOtvaranja">GODINA OTVARANJA</option>
+        </select>
+        <br />
+        <input type="submit" name="Opcija" value="Sortiraj" />
+
+        <div>Naziv:</div><input type="text" name="Naziv" value="" /><br />
+        <div>Adresa:</div><input type="text" name="Adresa" value="" placeholder="ulica broj,grad,postanski broj" /><br />
+        <div>Godina otvaranja:</div><input type="text" name="DonjaGranica" placeholder="DonjaGranica" /><input type="text" name="GornjaGranica" placeholder="GornjaGranica" /><br />
+        <br />
+        <input type="submit" name="Opcija" value="Pretrazi" />
+    </form>
+    @if (ViewBag.FitnesCentri == null || ViewBag.FitnesCentri.Count == 0)
+    {
+<p>Ne postoji nijedan fitnes centar</p> }
+            else
+            {
+<p>Fitnes Centri</p>
+                <table border="1">
+                    <tr><th>Naziv</th><th>Adresa</th><th>GodinaOtvaranja</th></tr>
+                    @foreach (var fc in ViewBag.FitnesCentri)
+                    {
+    <tr>
+        <td>@fc.Naziv</td>
+        <td>@fc.Adresa</td>
+        <td>@fc.GodinaOtvaranja</td>
+        <td>
+            <form action="/Neprijavljen/DetaljanPrikaz" method="post">
+                <input type="submit" name="Detalji" value="Detalji">
+                <input type="hidden" name="Naziv" value="@fc.Naziv">
+            </form>
+        </td>
+    </tr>                }
+                </table> }
+</body>

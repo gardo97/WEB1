@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = "PregledTrenera";
+}
+<head>
+    <link rel="stylesheet" href="~/Scripts/lookCss.css">
+</head>
+<body style="background-image: url( ~/Images/fitnessCentar.jpg); background-position:center; background-repeat:no-repeat;background-size:cover">
+    <form action="/Login/LoginVlasnik" method="post">
+        <input type="hidden" name="KorisnickoIme" value="@ViewBag.korisnicko_ime" />
+        <input type="submit" value="Nazad" />
+    </form>
+    <h2>DodajTrenera</h2>
+
+    <form action="/Vlasnik/PregledTrenera" method="post">
+        <table border="1">
+            <tr><td>KorisnickoIme:</td><td><input type="text" name="KorisnickoIme" placeholder="KorisnickoIme" required /></td></tr>
+            <tr><td>Lozinka:</td><td><input type="password" name="Lozinka" placeholder="Lozinka" required /></td></tr>
+            <tr><td>Ime:</td><td><input type="text" name="Ime" placeholder="Ime" required /></td></tr>
+            <tr><td>Prezime:</td><td><input type="text" name="Prezime" placeholder="Prezime" required /></td></tr>
+            <tr><td>Email:</td><td><input type="text" name="Email" placeholder="Email" required /></td></tr>
+            <tr><td>DatumRodjenja:</td><td><input type="date" name="DatumRodjenja" min="1990-03-01" value="2000-05-01" max="2007-05-01" required /></td></tr>
+            <tr>
+                <td>Pol:</td>
+                <td>
+                    <select name="Pol">
+                        <option value="MUSKI">MUSKI</option>
+                        <option value="ZENSKI">ZENSKI</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>FitnesCentar:</td>
+                <td>
+                    <select name="FitnesCentar">
+                        @foreach (var fc in ViewBag.FitnesCentri)
+                        {
+            <option value="@fc">@fc</option>
+}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="hidden" name="KorisnickoImeVlasnika" value="@ViewBag.korisnicko_ime">
+                    <input type="submit" name="Kreiraj" id="Kreiraj" value="Kreiraj">
+                </td>
+            </tr>
+        </table>
+    </form>
+    <br />
+    <br />
+
+    <h2>Lista mojih trenera</h2>
+
+    @if (ViewBag.Treneri.Count == 0)
+    {
+<p>Ne postoji nijedan zaposleni kod @ViewBag.korisnicko_ime</p> }
+else
+{
+foreach (var trener in ViewBag.Treneri)
+{
+<table border="1">
+    <tr><td>KorisnickoIme:</td><td>@trener.KorisnickoIme</td></tr>
+    <tr><td>Lozinka:</td><td>@trener.Lozinka</td></tr>
+    <tr><td>Ime:</td><td>@trener.Ime</td></tr>
+    <tr><td>Prezime:</td><td>@trener.Prezime</td></tr>
+    <tr><td>Pol:</td><td>@trener.Pol</td></tr>
+    <tr><td>Email:</td><td>@trener.Email</td></tr>
+    <tr><td>DatumRodjenja:</td><td>@trener.DatumRodjenja</td></tr>
+</table>
+                    <form action="/Vlasnik/PregledTrenera" method="post">
+                        <table>
+                            <tr>
+                                <td>
+                                    <input type="submit" name="Blokiraj" value="Blokiraj" />
+                                    <input type="hidden" name="KorisnickoIme" value="@trener.KorisnickoIme" />
+                                    <input type="hidden" name="KorisnickoImeVlasnika" value="@ViewBag.korisnicko_ime" />
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                                        <br />}
+                                }
+</body>

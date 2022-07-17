@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "FitnesCentriVlasnik";
+}
+
+<head>
+    <link rel="stylesheet" href="~/Scripts/lookCss.css">
+</head>
+<body style="background-image: url( ~/Images/fitnessCentar.jpg); background-position:center; background-repeat:no-repeat;background-size:cover">
+    <form action="/Login/LoginVlasnik" method="post">
+        <input type="hidden" name="KorisnickoIme" value="@ViewBag.korisnicko_ime" />
+        <input type="submit" value="Nazad" />
+    </form>
+    <h2>FitnesCentriVlasnik</h2>
+    <form action="/Vlasnik/FitnesCentriVlasnik" method="post">
+        <table border="1">
+            <tr><td>Naziv:</td><td><input type="text" name="Naziv" placeholder="Naziv" required /></td></tr>
+            <tr><td>Adresa:</td><td><input type="text" name="Adresa" placeholder="ulicabroj/grad/postanski broj" required /></td></tr>
+            <tr><td>GodinaOtvaranja:</td><td><input type="number" name="GodinaOtvaranja" placeholder="GodinaOtvaranja" required /></td></tr>
+            <tr><td>MesecnaClanarina:</td><td><input type="number" name="MesecnaClanarina" placeholder="Mesecna" required /></td></tr>
+            <tr><td>GodisnjaClanarina:</td><td><input type="number" name="GodisnjaClanarina" placeholder="Godisnja" required /></td></tr>
+            <tr><td>CenaJednogTreninga:</td><td><input type="number" name="CenaJednogTreninga" placeholder="JedanTrening" required /></td></tr>
+            <tr><td>CenaGrupnogTreninga:</td><td><input type="number" name="CenaGrupnogTreninga" placeholder="GrupniTrening" required /></td></tr>
+            <tr><td>CenaPersonalniTrener:</td><td><input type="number" name="CenaPersonalniTrener" placeholder="PersonalniTrener" required /></td></tr>
+            <tr>
+                <td>
+                    <input type="hidden" name="KorisnickoIme" value="@ViewBag.korisnicko_ime">
+                    <input type="submit" name="Opcija" id="Kreiraj" value="Kreiraj">
+                </td>
+            </tr>
+        </table>
+    </form>
+    <br />
+    <br />
+
+    <h2>Lista mojih fitnes centara</h2>
+
+    @if (ViewBag.FitnesCentri.Count == 0)
+    {
+<p>@ViewBag.korisnicko_ime nije vlasnik nijednog fitnes centra</p> }
+else
+{
+foreach (var fc in ViewBag.FitnesCentri)
+{
+<form action="/Vlasnik/FitnesCentriVlasnik" method="post">
+    <table border="1">
+        <tr><td>Naziv:</td><td>@fc.Naziv</td></tr>
+        <tr><td>Adresa:</td><td><input type="text" name="Adresa" value="@fc.Adresa" required /></td></tr>
+        <tr><td>GodinaOtvaranja:</td><td><input type="number" name="GodinaOtvaranja" value="@fc.GodinaOtvaranja" required /></td></tr>
+        <tr><td>MesecnaClanarina:</td><td><input type="number" name="MesecnaClanarina" value="@fc.MesecnaClanarina" required /></td></tr>
+        <tr><td>GodisnjaClanarina:</td><td><input type="number" name="GodisnjaClanarina" value="@fc.GodisnjaClanarina" required /></td></tr>
+        <tr><td>CenaJednogTreninga:</td><td><input type="number" name="CenaJednogTreninga" value="@fc.CenaJednogTreninga" required /></td></tr>
+        <tr><td>CenaGrupnogTreninga:</td><td><input type="number" name="CenaGrupnogTreninga" value="@fc.CenaGrupnogTreninga" required /></td></tr>
+        <tr><td>CenaPersonalniTrener:</td><td><input type="number" name="CenaPersonalniTrener" value="@fc.CenaPersonalniTrener" required /></td></tr>
+    </table>
+    <table>
+        <tr>
+            <td>
+                <input type="submit" name="Opcija" value="Obrisi" />
+                <input type="submit" name="Opcija" value="Izmeni" />
+                <input type="hidden" name="Naziv" value="@fc.Naziv" />
+                <input type="hidden" name="KorisnickoImeVlasnika" value="@fc.KorisnickoImeVlasnika" />
+                <input type="hidden" name="KorisnickoIme" value="@ViewBag.korisnicko_ime" />
+            </td>
+        </tr>
+    </table>
+</form>
+                    <br />}
+            }
+</body>
